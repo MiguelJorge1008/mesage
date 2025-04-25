@@ -17,19 +17,22 @@
     .message-container {
       background-color: #d3d3d3;
       border-radius: 10px;
-      padding: 30px; /* Ajustei o padding */
+      padding: 20px; /* Ajustei o padding */
       max-width: 700px; /* Largura máxima */
       width: 90%; /* Largura ocupa 90% da tela */
       text-align: center;
       box-sizing: border-box; /* Inclui padding no cálculo da largura */
+      max-height: 80vh; /* Limita a altura máxima para 80% da altura da tela */
+      overflow-y: auto; /* Permite rolagem vertical se necessário */
     }
     .message {
-      font-size: 24px; /* Reduzi o tamanho da fonte */
+      font-size: 24px; /* Tamanho de fonte ajustado */
       color: #000000; /* Cor da fonte preta */
       font-weight: bold;
       margin-bottom: 20px;
       word-wrap: break-word; /* Quebra o texto se for muito longo */
       white-space: pre-wrap; /* Preserva quebras de linha e espaços */
+      line-height: 1.5; /* Aumentei o espaçamento entre as linhas */
     }
   </style>
 </head>
