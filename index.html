@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mensagem do Amor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9e0e0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .message-container {
+      background-color: #d3d3d3;
+      border-radius: 10px;
+      padding: 40px; /* Aumentei o padding */
+      max-width: 700px; /* Aumentei o tamanho máximo */
+      width: 90%; /* A largura ocupa 90% da tela */
+      text-align: center;
+    }
+    .message {
+      font-size: 36px; /* Aumentei o tamanho da fonte */
+      color: #000000; /* Cor da fonte preta */
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="message-container">
+    <div class="message" id="message">Carregando...</div>
+  </div>
+
+  <script>
+    // Link da API da sua planilha (substituído com o seu ID)
+    const SHEET_URL = "https://opensheet.elk.sh/1xmtwIcl7FVPlmQXQU3rtGiETGDGWxBflmXIf4DRBECw/Página1"; // Link da planilha
+
+    // Função para buscar a data e mostrar a mensagem correspondente
+    function fetchMessage() {
+      const today = new Date().toISOString().split('T')[0]; // Obtém a data no formato YYYY-MM-DD
+      console.log("Data de hoje: ", today); // Mostra a data de hoje no console
+
+      fetch(SHEET_URL)
+        .then(response => response.json())
+        .then(data => {
+          console.log("Dados recebidos da planilha: ", data); // Exibe os dados recebidos da planilha no console
+
+          const messageData = data.find(item => item.data === today); // Procura pela data correspondente
+
+          if (messageData) {
+            console.log("Mensagem encontrada: ", messageData.mensagem); // Mostra a mensagem encontrada no console
+            document.getElementById('message').innerText = messageData.mensagem; // Exibe a mensagem
+          } else {
+            console.log("Nenhuma mensagem encontrada para hoje.");
+            document.getElementById('message').innerText = "Ainda não há uma mensagem para hoje..."; // Caso não haja mensagem
+          }
+        })
+        .catch(error => {
+          console.error('Erro ao carregar a mensagem:', error);
+          document.getElementById('message').innerText = "Erro ao carregar a mensagem!";
+        });
+    }
+
+    // Chama a função ao carregar a página
+    fetchMessage();
+  </script>
+</body>
+</html>
